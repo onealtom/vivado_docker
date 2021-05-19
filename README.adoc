@@ -46,7 +46,7 @@ $ docker run -u root -v $(pwd):/home/vivado/workspace -p 6080:80 -p 5900:5900 -e
 ----
 
 
-== 挂在当前目录 exec模式编译
+== 挂载当前目录 exec模式编译
 
 [source,bash]
 ----
@@ -60,4 +60,27 @@ $ docker run --rm -v $(pwd):/home/vivado/workspace --entrypoint "/bin/bash" viva
 [source,bash]
 ----
 
+----
+
+== 共享镜像
+
+先在服务器上安装registry镜像并运行。
+
+[source,bash]
+----
+$ docker images
+REPOSITORY                                                       TAG                 IMAGE ID            CREATED             SIZE
+registry                                                         latest              f32a97de94e1        2 years ago         25.8MB
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+610f3e40d03c        registry            "/entrypoint.sh /etc…"   2 days ago          Up 2 days           0.0.0.0:5000->5000/tcp   suspicious_shamir
+----
+
+推送镜像到服务端
+
+[source,bash]
+----
+$ docker tag vivado2019_2:latest 192.168.3.131:5000/vivado2019_2
+$ docker push 192.168.3.131:5000/vivado2019_2
 ----
