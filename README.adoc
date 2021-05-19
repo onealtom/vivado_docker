@@ -22,7 +22,7 @@ $ cd build_dir
 $ docker build --build-arg VIVADO_TAR_HOST=http://hostip:5000 --build-arg VIVADO_TAR_FILE=Xilinx_Vivado_2019.2_1106_2127 -t vivado2019_2 .
 ----
 
-== 启动容器vnc/novnc登录 
+== 启动容器vnc/novnc登录
 
 [source,bash]
 ----
@@ -83,4 +83,20 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 ----
 $ docker tag vivado2019_2:latest 192.168.3.131:5000/vivado2019_2
 $ docker push 192.168.3.131:5000/vivado2019_2
+----
+
+在新主机上拉取
+
+[source,bash]
+----
+$ docker tag vivado2019_2:latest 192.168.3.131:5000/vivado2019_2
+$ docker pull 192.168.3.131:5000/vivado2019_2
+----
+
+
+== 从阿里云pull镜像
+
+[source,bash]
+----
+$ docker pull registry.cn-shenzhen.aliyuncs.com/cangcanglang/vivado2019p2:v1
 ----
